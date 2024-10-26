@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Seram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet"> <!-- Menambahkan font Creepster -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1c1c1c; /* Latar belakang gelap */
+            color: #f2f2f2; /* Teks putih */
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://example.com/spooky-background.jpg'); /* Gambar latar belakang menakutkan */
+            background-size: cover; /* Mengatur gambar agar memenuhi layar */
+            background-blend-mode: darken; /* Memadukan gambar dengan warna latar belakang */
+            display: flex; /* Menggunakan flexbox untuk rata tengah */
+            flex-direction: column; /* Mengatur arah kolom */
+            align-items: center; /* Pusatkan secara horizontal */
+            justify-content: center; /* Pusatkan secara vertikal */
+            height: 100vh; /* Mengisi seluruh tinggi viewport */
+        }
+
+        h2 {
+            color: #ff0000; /* Warna merah untuk judul */
+            text-align: center; /* Pusatkan judul */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Bayangan teks */
+            font-family: 'Creepster', cursive; /* Font menakutkan */
+            margin-bottom: 20px; /* Jarak bawah judul */
+            font-size: 4em; /* Ukuran font lebih besar */
+            animation: shake 0.5s infinite; /* Menambahkan efek gerak */
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            25% { transform: translate(-1px, -2px) rotate(-1deg); }
+            50% { transform: translate(-1px, 2px) rotate(1deg); }
+            75% { transform: translate(1px, 0px) rotate(0deg); }
+            100% { transform: translate(0px, -1px) rotate(0deg); }
+        }
+
+        form {
+            background-color: #333333; /* Latar belakang gelap untuk form */
+            border: 2px solid #ff0000; /* Garis tepi merah */
+            border-radius: 10px; /* Sudut membulat */
+            padding: 30px; /* Padding lebih besar */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Bayangan merah */
+            max-width: 500px; /* Lebar maksimal form ditingkatkan */
+            width: 100%; /* Lebar penuh form */
+            transition: all 0.3s ease; /* Transisi halus saat hover */
+        }
+
+        form:hover {
+            transform: scale(1.05); /* Zoom saat hover */
+        }
+
+        label {
+            color: #f2f2f2; /* Warna teks label */
+            display: block;
+            margin-bottom: 10px; /* Jarak bawah ditingkatkan */
+            font-size: 1.2em; /* Ukuran font label lebih besar */
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px); /* Lebar penuh minus padding */
+            padding: 15px; /* Padding dalam input lebih besar */
+            margin-bottom: 20px; /* Jarak bawah input ditingkatkan */
+            border: 1px solid #ff0000; /* Garis tepi merah */
+            border-radius: 5px; /* Sudut membulat */
+            background-color: #444444; /* Latar belakang input gelap */
+            color: #f2f2f2; /* Teks input putih */
+            font-size: 1.2em; /* Ukuran font input lebih besar */
+            transition: border-color 0.3s; /* Transisi pada border */
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff6666; /* Warna border saat fokus */
+            outline: none; /* Hilangkan outline default */
+        }
+
+        input[type="submit"] {
+            background-color: #ff0000; /* Latar belakang merah untuk tombol */
+            color: white; /* Warna teks putih */
+            border: none; /* Tanpa garis tepi */
+            padding: 15px; /* Padding tombol lebih besar */
+            border-radius: 5px; /* Sudut membulat */
+            cursor: pointer; /* Kursor saat hover */
+            transition: background-color 0.3s; /* Transisi warna tombol */
+            width: 100%; /* Lebar penuh tombol */
+            font-weight: bold; /* Teks tebal */
+            font-size: 1.2em; /* Ukuran font tombol lebih besar */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #cc0000; /* Warna lebih gelap saat hover */
+        }
+
+        #informasi {
+            color: #ffcc00; /* Warna teks informasi kuning */
+            margin-top: 10px; /* Jarak atas untuk informasi */
+            text-align: center; /* Pusatkan informasi */
+            font-style: italic; /* Miringkan teks */
+            font-size: 1.2em; /* Ukuran font informasi lebih besar */
+        }
+    </style>
+</head>
+<body>
+    <h2>Daftar Isian Kecamatan</h2> <!-- Judul diubah -->
+    <form action="input.php" onsubmit="return validateForm(event)" method="post">
+        <label for="kecamatan">Kecamatan:</label>
+        <input type="text" id="kecamatan" name="kecamatan" value="">
+        
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" value="">
+        
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" value="">
+        
+        <label for="luas">Luas:</label>
+        <input type="text" id="luas" name="luas" value="">
+        
+        <label for="jumlah_penduduk">Jumlah Penduduk:</label>
+        <input type="text" id="jumlah_penduduk" name="jumlah_penduduk" value="">
+        
+        <input type="submit" value="Submit">
+    </form>
+    <p id="informasi"></p>
+    <script>
+        function validateForm(event) {
+            let luas = document.getElementById("luas").value;
+            let text = "";
+            if (isNaN(luas) || luas < 1) {
+                text = "Data luas harus angka dan tidak boleh bernilai negatif";
+                document.getElementById("informasi").innerHTML = text;
+                event.preventDefault(); // Stop form submission
+                return false; // Return false untuk mengindikasikan kesalahan
+            }
+            document.getElementById("informasi").innerHTML = ""; // Kosongkan informasi jika valid
+            return true; // Return true jika valid
+        }
+    </script>
+</body>
+</html>
